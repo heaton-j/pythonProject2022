@@ -1,16 +1,24 @@
-# This is a sample Python script.
+from tkinter import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+root = Tk()
+root.title("Physical Activity Planner and Tracker")
 
+message_text = StringVar()
+message_text.set("Welcome, please select one of the three options below")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+Sign_button = Button(root, text="Sign Up", width=90, height=10, bg='lightblue')
+Sign_button.pack()
 
+Log_button = Button(root, text="Log in", width=90, height=10, bg='pink')
+Log_button.pack()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+Help_button = Button(root, text="Help", width=90, height=10, bg='lightgreen')
+Help_button.pack()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+root.mainloop()
+
+def help():
+    print("Help")
+    Back_button = Button(root, text="Back")
+    Back_button.pack()
+
