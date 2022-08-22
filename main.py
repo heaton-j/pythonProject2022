@@ -1,25 +1,43 @@
 from tkinter import *
 
+def raise_frame(frame):
+    frame.tkraise()
+
 root = Tk()
-root.title("Physical Activity Planner and Tracker")
+root.title("Physical activity planner and tracker")
 
-label1 = Label(root, text="Welcome, please select one of the three options below", height=5, font=("arial", 20))
-label1.pack()
+Home = Frame(root)
+Calendar = Frame(root)
+Tracker = Frame(root)
+Help = Frame(root)
 
-def sign_page ():
-    print("Please create a password between 4-8 characters long")
-    Enter_button = Button(root, text="Enter", width=50, height=5, command=sign_page)
-    Enter_button.pack()
+for frame in (Home, Calendar, Tracker, Help):
+    frame.grid(row=100, column=100, sticky='news')
 
+# creating the labels and buttons that will be shown on the home page
+Label(Home, text='Home', width=90, height=5, font=190).pack()
+Label(Home, text='Please select one of the options below to continue', width=90, height=5, font=100).pack()
+Button(Home, text='Calendar', width=90, height=5, font=50, bg='lightblue', command=lambda: raise_frame(Calendar)).pack()
+Button(Home, text='Tracker', width=90, height=5, font=50, bg='lightgreen', command=lambda: raise_frame(Tracker)).pack()
+Button(Home, text='Help', width=90, height=5, font=50, bg='lightpink', command=lambda: raise_frame(Help)).pack()
+Button(Home, text='Log Out', width=90, height=5, font=50, bg='red', command=root.destroy).pack()
 
-Sign_button = Button(root, text="Sign Up", width=150, height=3, bg='lightblue', font=("arial", 40), command=sign_page)
-Sign_button.pack()
+# creating the labels and buttons that will be shown on the calendar page
+Label(Calendar, text='Calendar', width=90, height=5, font=80).pack()
+Label(Calendar, text='Welcome to the Calendar Page', width=50, height=3, font=50).pack()
+Button(Calendar, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda: raise_frame(Home)).pack()
 
-Log_button = Button(root, text="Log in", width=150, height=3, bg='pink', font=("arial", 40))
-Log_button.pack()
+# creating the labels and buttons that will be shown on the tracker page
+Label(Tracker, text='Tracker', width=90, height=5, font=80).pack()
+Label(Tracker, text='Welcome to the Tracker Page', width=50, height=3, font=50).pack()
+Button(Tracker, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda: raise_frame(Home)).pack()
 
-Help_button = Button(root, text="Help", width=150, height=3, bg='lightgreen', font=("arial", 40))
-Help_button.pack()
+# creating the labels and buttons that will be shown on the help page
+Label(Help, text='Help', width=90, height=5, font=80).pack()
+Label(Help, text='Welcome to the Help Page', width=50, height=3, font=50).pack()
+Button(Help, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda: raise_frame(Home)).pack()
+
+raise_frame(Home)
 
 root.mainloop()
 
