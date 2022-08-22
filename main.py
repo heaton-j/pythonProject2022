@@ -1,36 +1,38 @@
-from tkinter import *import tkinter as tk
+from tkinter import *
+
+def raise_frame(frame):
+    frame.tkraise()
 
 root = Tk()
-root.title("Physical Activity Planner and Tracker")
+root.title("Physical activity planner and tracker")
 
-class ActivityApp(tk.Tk):
-    def __init__(self):
-        Tk.Frame.__init__(self)
-        self._frame = None
-        self.switch_frame(HomePage)
+Home = Frame(root)
+Calendar = Frame(root)
+Tracker = Frame(root)
+Help = Frame(root)
 
-    def switch_frame(self, frame_class):
-        new_frame = frame_class(self)
-        if self._frame is not None:
-            self._frame.destroy()
-        self._frame = new_frame
-        self._frame.pack()
+for frame in (Home, Calendar, Tracker, Help):
+    frame.grid(row=100, column=100, sticky='news')
 
-class HomePage(Tk.frame):
-    def __init__(self,master):
-     Tk.Frame.__init__(root,master)
-    Label1 = Label(root, text="Please select one of the options below")
-    Calendar_Button = Tk.Button(root, text="Go to Calendar",
-                                    command=lambda: master.switch_frame(CalendarPage)).pack()
+Label(Home, text='Homepage', width=90, height=5, font=90).pack()
+Label(Home, text='Please select one of the options below to continue', width=90, height=5, font=100).pack()
+Button(Home, text='Calendar', width=90, height=5, font=50, bg='lightblue', command=lambda:raise_frame(Calendar)).pack()
+Button(Home, text='Tracker', width=90, height=5, font=50, bg='lightgreen', command=lambda:raise_frame(Tracker)).pack()
+Button(Home, text='Help', width=90, height=5, font=50, bg='lightpink', command=lambda:raise_frame(Help)).pack()
 
+Label(Calendar, text='Calendar', width=90, height=5, font=80).pack()
+Label(Calendar, text='Welcome to the calendar page', width=50, height=3, font=50).pack()
+Button(Calendar, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda:raise_frame(Home)).pack()
 
-class CalendarPage(Tk.frame):
-    def __init__(self,master):
-        Tk.Frame.__init__(root,master)
-    Label2 = Label(root, text="This is the calendar page")
-    Back_Button = Tk.Button(root, text="Homepage",
-                                 command=lambda: master.switch_frame(HomePage)).pack()
+Label(Tracker, text='Tracker', width=90, height=5, font=80).pack()
+Label(Tracker, text='Welcome to the tracker page', width=50, height=3, font=50).pack()
+Button(Tracker, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda:raise_frame(Home)).pack()
 
+Label(Help, text='Help', width=90, height=5, font=80).pack()
+Label(Help, text='Welcome to the help page', width=50, height=3, font=50).pack()
+Button(Help, text='Home', width=50, height=5, font=50, bg='lightyellow', command=lambda:raise_frame(Home)).pack()
+
+raise_frame(Home)
 
 root.mainloop()
 
