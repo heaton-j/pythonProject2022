@@ -37,6 +37,13 @@ Label(Tracker, text='Click on the box below to enter hours for each day where ph
 
 Label(Tracker, text='The amount of physical activity done for the past week :', font=50, height=3).pack()
 
+def show():
+    showLabel = Label(Tracker, text=clicked.get()).pack
+
+clicked = StringVar()
+clicked.set("Monday")
+
+
 Label(Tracker, text='Day :', width=25, height=2, font=20).pack(pady=2, padx=3)
 day_choice = StringVar()
 Day_frame = ttk.Combobox(Tracker, textvariable=day_choice, width=25, height=8)
@@ -58,7 +65,7 @@ Minute_frame['values'] = ('5 minutes', '10 minutes', '15 minutes', '20 minutes',
 Minute_frame.pack(pady=20, padx=3)
 
 # button for user to enter their data chosen
-Button(Tracker, text='Enter', width=10, height=3).pack(pady=5)
+Button(Tracker, text='Enter', width=10, height=3, command=show).pack(pady=5)
 
 # button that allows users to go back to the home page
 Button(Tracker, text='Home', width=30, height=2, font=50, bg='lightyellow', command=lambda: raise_frame(Home)).pack()
