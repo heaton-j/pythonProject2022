@@ -22,7 +22,7 @@ for frame in (Home, Tracker, Help):
 Label(Home, text='Home', width=8, height=4, font='sans 16 bold').pack()
 
 Label(Home, text='Please select one of the options below to continue', width=90, height=6, font=100).pack()
-home_tracker= Button(Home, text='Tracker', width=90, height=6, font=50, bg='lightgreen', command=lambda: raise_frame(Tracker)).pack()
+home_tracker = Button(Home, text='Tracker', width=90, height=6, font=50, bg='lightgreen', command=lambda: raise_frame(Tracker)).pack()
 home_help = Button(Home, text='Help', width=90, height=6, font=50, bg='lightpink', command=lambda: raise_frame(Help)).pack()
 Button(Home, text='Log Out', width=90, height=6, font=50, bg='red', command=root.destroy).pack()
 
@@ -44,29 +44,41 @@ day_choice = StringVar()
 Day_frame = ttk.Entry(Tracker, textvariable=day_choice, width=25)
 Day_frame.pack(pady=2, padx=3)
 
-
-
 # Label and combobox where users enter how much time they've done of physical activity
 Label(Tracker, text='Time done : (eg. 95)', width=25, height=1, font=10).pack(pady=2, padx=3)
 hour_choice = StringVar()
 Hour_frame = ttk.Entry(Tracker, textvariable=hour_choice, width=25)
 Hour_frame.pack(pady=2, padx=3)
 
+days = "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+input = Day_frame.get()
 
-# Window that pops up with calculations
-def trackerMessage():
-   day = Day_frame.get()
-   time = Hour_frame.get()
-   messagebox.showinfo(print('Day: {}', 'Time: {}'.format(day, time)))
-
-
-def print(Tracker):
-    print(Day_frame.get())
-    print(Hour_frame.get())
+def check_day():
+     if input in days:
+       day_1.config(text="The day you entered is {}".format(Day_frame))
+     else:
+       day_1.config(text="! Please enter a day of the week !", fg='red')
 
 
-# Button for user to enter their data chosen
-Enter_button = ttk.Button(Tracker, text='Enter', width=10, command=trackerMessage).pack(pady=5)
+day_1 = Label(Tracker, text='')
+day_1.pack(pady=10)
+
+Button_1 = ttk.Button(Tracker, text='   Enter Day  ', command=check_day()).pack()
+
+def number():
+   try:
+       int(Hour_frame.get())
+       answer.config(text="The amount of minute done on {} is {}".format(day_choice, Hour_frame))
+   except ValueError:
+       answer.config(text="! Please enter a number !", fg='red')
+
+
+My_button = ttk.Button(Tracker, text="Enter number", command=number).pack()
+
+answer = Label(Tracker, text='')
+answer.pack(pady=20)
+
+
 
 
 # button that allows users to go back to the home page
