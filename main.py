@@ -23,18 +23,17 @@ Label(Home, text='Home', width=8, height=4, font='sans 16 bold').pack()
 
 Label(Home, text='Please select one of the options below to continue', width=90, height=6, font=100).pack()
 home_tracker = Button(Home, text='Tracker', width=90, height=6, font=50, bg='lightgreen', command=lambda: raise_frame(Tracker)).pack()
-home_help = Button(Home, text='Help', width=90, height=6, font=50, bg='lightpink', command=lambda: raise_frame(Help)).pack()
+home_help = Button(Home, text='Help', width=90, height=6, font=50, bg='light pink', command=lambda: raise_frame(Help)).pack()
 Button(Home, text='Log Out', width=90, height=6, font=50, bg='red', command=root.destroy).pack()
 
 # creating the labels and buttons that will be shown on the tracker page
 Label(Tracker, text='Tracker', width=90, height=3, font='sans 11 bold').pack()
 
-Label(Tracker, text='Click on the box below to enter hours for each day where physical activity was completed :', bg='lightpink').pack()
+Label(Tracker, text='Click on the box below to enter hours for each day where physical activity was completed :', bg='light pink').pack()
 
-Label(Tracker, text='!!!Remember at least 30 minutes of moderate physical activty is recommended each day!!!').pack()
+Label(Tracker, text='!!!Remember at least 30 minutes of moderate physical activity is recommended each day!!!').pack()
 
 Label(Tracker, text='The amount of physical activity done for this day :', font=50, height=3).pack()
-
 
 
 
@@ -73,24 +72,44 @@ def number():
        answer.config(text="! Please enter a number !", fg='red')
 
 
-My_button = ttk.Button(Tracker, text="Enter number", command=number).pack()
+My_button = ttk.Button(Tracker, text="Enter minutes", command=number).pack()
 
 answer = Label(Tracker, text='')
 answer.pack(pady=20)
-
-
 
 
 # button that allows users to go back to the home page
 Button(Tracker, text='Home', width=15, height=1, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack(
     ipadx=10, ipady=10, expand=True, side='left')
 
+
 # creating the labels and buttons that will be shown on the help page
-Label(Help, text='Help', width=90, height=5, font=80).pack()
-Label(Help, text='Welcome to the Help Page', width=50, height=3, font=50).pack()
+Label(Help, text='Help', width=90, height=3, font='sans 11 bold').pack()
+
+Label(Help, text='To go back to main menu', font='sans 11 bold').pack()
+Label(Help, text='Click on the "Home" button at bottom of this page').pack()
+
+Label(Help, text='To go to tracker page', font='sans 11 bold').pack()
+Label(Help, text='1: click on "Home" button at the bottom of this page').pack()
+Label(Help, text='2: click on the light green button on the top of the home page titled "Tracker"').pack()
+
+Label(Help, text='To end program', font='sans 11 bold').pack()
+Label(Help, text='1: click on "Home" button at the bottom of this page').pack()
+Label(Help, text='2: Click on the red button at the bottom of the home page titled "Log Out"').pack()
+
+Label(Help, text='To choose day where physical activity was done', font='sans 11 bold').pack()
+Label(Help, text='1: Go to home page and click on the light green button on the top of the page titled "Tracker"').pack()
+Label(Help, text='2: Click on first entry widget below the "Day" title').pack()
+Label(Help, text='3: Click on the button titled "Enter Day"').pack()
 
 
-Button(Help, text='Home', width=30, height=2, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack()
+Label(Help, text='To enter time of physical activity done', font='sans 11 bold').pack()
+Label(Help, text='1: Go to home page and click on the light green button at the top of the page titled "Tracker"').pack()
+Label(Help, text='2: Click on the second entry widget below the "Minutes done" title').pack()
+Label(Help, text='3: Click on the button titled "Enter Minutes"').pack()
+
+
+Button(Help, text='Home', width=30, height=2, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack(pady=50, padx=2)
 
 raise_frame(Home)
 
