@@ -29,7 +29,7 @@ Button(Home, text='Log Out', width=90, height=6, font=50, bg='red', command=root
 # creating the labels and buttons that will be shown on the tracker page
 Label(Tracker, text='Tracker', width=90, height=3, font='sans 11 bold').pack()
 Label(Tracker, text='Click on the box below to enter hours for each day where physical activity was completed :', bg='light pink').pack()
-Label(Tracker, text='!!!Remember at least 30 minutes of moderate physical activity is recommended each day!!!').pack()
+Label(Tracker, text='!!!Remember at least 60 minutes of moderate physical activity is recommended each day!!!').pack()
 Label(Tracker, text='The amount of physical activity done for this day :', font=50, height=3).pack()
 
 # Label and combobox where users select the day they want to enter their data
@@ -44,50 +44,64 @@ hour_choice = StringVar()
 Hour_frame = ttk.Entry(Tracker, textvariable=hour_choice, width=25)
 Hour_frame.pack(pady=2, padx=3)
 
-# tells users to only enter a day of the week in Day_frame()
-days = "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-input = Day_frame.get()
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
+day_entry = Day_frame.get()
+# check day entered is in days
+def checking():
+   if day_entry in days:
+       print(day_entry)
+   elif day_entry not in days:
+       day_error.config(text="Please re-enter a day of the week", fg='red')
 
-def check_day():
-     if input in days:
-       day_1.config(text="The day you entered is {}".format(Day_frame))
-     elif input == "monday":
-       day_1.config(text="Please re-enter a day of the week !", fg='red')
-     else:
-       day_1.config(text="")
+day_error = Label(Tracker, text='')
+day_error.pack()
 
-day_1 = Label(Tracker, text='')
-day_1.pack(pady=10)
+# print day entered by user into text format
+def check_day(Day_frame):
+    day_entry = Day_frame.get()
+    print("On {},".format(day_entry))
 
-Button_1 = ttk.Button(Tracker, text='   Enter Day  ', command=check_day()).pack()
+# function for numbers not in range 1 - 1440
+def number_restrict(Hour_frame):
+   number_entry = int(Hour_frame.get())
+   if number_entry in range(1, 1441):
+       print("The amount of physical activity you did is {} minutes".format(number_entry))
+   elif number_entry not in range(1, 1441):
+       restrict.config(text="Please re-enter a number between 1 and 1440", fg='red')
 
+restrict = Label(Tracker, text='')
+restrict.pack()
 
-# function that tells users to enter a number if they have not already
+required_time = 60
+def time():
+    number_entry = int(Hour_frame.get())
+    if number_entry == 60:
+        print("You have reached the required time of physical activity for today")
+    elif number_entry > 60:
+        print("You have reached the required time of physical activity for today")
+    else:
+        print("You have not reached the required time of physical exercise for today")
+
+# print minutes entered by users into text format
+def check_number(Hour_frame):
+   number_entry = int(Hour_frame.get())
+   print("")
+
+# validate input of Hour_frame in any other cases other than numbers are entered
 def number():
-   try:
-       int(Hour_frame.get())
-       answer.config(text="The amount of minute done on {} is {}".format(day_choice, Hour_frame))
-   except ValueError:
-       answer.config(text="! Please re-enter a number between 1 - 1440 !", fg='red')
-
-
-My_button = ttk.Button(Tracker, text="Enter minutes", command=number).pack()
+  try:
+      int(Hour_frame.get())
+      answer.config(text="")
+  except ValueError:
+      answer.config(text="! Please enter a number !", fg='red')
 
 answer = Label(Tracker, text='')
-answer.pack()
+answer.pack(pady=5)
 
-# testing another way to print
-def call_result(label_result, Day_frame, Hour_frame):
-    day_result = (Day_frame.get())
-    hour_result = (Hour_frame.get())
-    label_result.config(text="Result: {} on {}".format(day_result, hour_result))
-    return
-
-label_result = ttk.Label(Tracker)
-label_result.pack()
-
-button_result = ttk.Button(Tracker, text="Enter result", command=call_result(label_result, Day_frame, Hour_frame)).pack()
+# button for entry that runs every function
+Main_button = ttk.Button(Tracker, text="Enter", command=lambda: [check_day(Day_frame), number(), checking(),
+number_restrict(Hour_frame), check_number(Hour_frame), time()]).pack()
 
 
 # button that allows users to go back to the home page
@@ -120,7 +134,6 @@ Label(Help, text='2: Click on the second entry widget below the "Minutes done" t
 Label(Help, text='3: Click on the button titled "Enter Minutes"').pack()
 
 Button(Help, text='Home', width=30, height=2, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack(pady=50, padx=2)
-
 
 raise_frame(Home)
 
