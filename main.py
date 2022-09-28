@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-
 def raise_frame(frame):
     frame.tkraise()
 
@@ -48,11 +47,11 @@ days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sun
 
 day_entry = Day_frame.get()
 # check day entered is in days
-def checking():
-   if day_entry in days:
-       print(day_entry)
-   elif day_entry not in days:
-       day_error.config(text="Please re-enter a day of the week", fg='red')
+def checking(day_entry):
+    while day_entry in days:
+        print('')
+
+        day_error.config(text="Please re-enter a day of the week", fg='red')
 
 day_error = Label(Tracker, text='')
 day_error.pack()
@@ -100,14 +99,13 @@ answer = Label(Tracker, text='')
 answer.pack(pady=5)
 
 # button for entry that runs every function
-Main_button = ttk.Button(Tracker, text="Enter", command=lambda: [check_day(Day_frame), number(), checking(),
+Main_button = ttk.Button(Tracker, text="Enter", command=lambda: [checking(day_entry), number(), check_day(Day_frame),
 number_restrict(Hour_frame), check_number(Hour_frame), time()]).pack()
 
 
 # button that allows users to go back to the home page
 Button(Tracker, text='Home', width=15, height=1, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack(
     ipadx=10, ipady=10, expand=True, side='left')
-
 
 # creating the labels and buttons that will be shown on the help page
 Label(Help, text='Help', width=90, height=3, font='sans 11 bold').pack()
@@ -133,7 +131,11 @@ Label(Help, text='1: Go to home page and click on the light green button at the 
 Label(Help, text='2: Click on the second entry widget below the "Minutes done" title').pack()
 Label(Help, text='3: Click on the button titled "Enter Minutes"').pack()
 
-Button(Help, text='Home', width=30, height=2, font=50, bg='lightblue', command=lambda: raise_frame(Home)).pack(pady=50, padx=2)
+Label(Help, text='How do I know if my input is valid?', font='sans 11 bold').pack()
+Label(Help, text='Once an entry for Day or/and Time has been submitted, press the "entry" button').pack()
+Label(Help, text='If a warning message pops up on the screen, re enter your data into the respective entry box').pack()
+
+Button(Help, text='Home', width=30, height=2, font=40, bg='lightblue', command=lambda: raise_frame(Home)).pack(pady=50, padx=1)
 
 raise_frame(Home)
 
